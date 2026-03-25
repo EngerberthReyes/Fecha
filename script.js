@@ -142,7 +142,7 @@ const UI = {
   },
   contador: {
     elemento: document.querySelector(".contador"),
-    valor: -1, // El contador vive aquí
+    valor: -1,
   },
   fechaLargaElemento: document.querySelector(".fecha-completa"),
 };
@@ -199,7 +199,6 @@ class Fecha {
       year: "numeric",
     });
 
-    // Capitalizar meses (ej. "de Enero")
     fechaTexto = fechaTexto.replace(
       /de (\w)/g,
       (match, p1) => `de ${p1.toUpperCase()}`,
@@ -214,7 +213,6 @@ class Fecha {
 const ejecutarRenderizacion = () => {
   const ahora = new Date();
 
-  // 1. Actualizar Contador (Suma 1 cada segundo)
   if (UI.contador.elemento && UI.contador.valor < 22) {
     UI.contador.valor++;
     UI.contador.elemento.textContent = String(UI.contador.valor).padStart(
@@ -223,7 +221,6 @@ const ejecutarRenderizacion = () => {
     );
   }
 
-  // 2. Renderizar los 3 relojes (Corregido el array)
   [UI.superior, UI.centro, UI.inferior].forEach((reloj) => {
     const instanciaFecha = new Fecha(ahora, reloj.adelantoHoras);
 
@@ -237,23 +234,20 @@ const ejecutarRenderizacion = () => {
       );
   });
 
-  // 3. Fecha completa inferior
   if (UI.fechaLargaElemento) {
     UI.fechaLargaElemento.textContent = new Fecha(ahora).obtenerFechaLarga();
   }
 };
 
-// Eventos de click para cambiar formato 12h/24h
 [UI.superior, UI.centro, UI.inferior].forEach((reloj) => {
   if (reloj.horaElemento) {
     reloj.horaElemento.style.cursor = "pointer";
     reloj.horaElemento.onclick = () => {
       reloj.esMilitar = !reloj.esMilitar;
-      ejecutarRenderizacion(); // Refrescar al instante
+      ejecutarRenderizacion();
     };
   }
 });
 
-// Iniciar ciclo
 ejecutarRenderizacion();
 setInterval(ejecutarRenderizacion, 1000);
