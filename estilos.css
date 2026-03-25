@@ -2,12 +2,21 @@
   font-family: "Programme Alt";
   src:
     url(programme_normal.woff2) format("woff2"),
-    url(programme_normal.woff) format("woff");
+    url(programme_normal.woff) format("woff"),
+    url(QuartzMSRegular.woff) format("woff");
   font-style: normal;
   font-weight: 600;
   font-feature-settings:
     "ss03", "ss04", "ss05", "ss06", "ss07", "ss08", "ss09", "ss10", "ss11",
     "ss15", "ss16", "ss18", "ss19", "ss20";
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "QuartzMS";
+  src: url(QuartzMSRegular.woff) format("woff");
+  font-style: normal;
+  font-weight: normal;
   font-display: swap;
 }
 
@@ -17,17 +26,33 @@ body {
   box-sizing: border-box;
   padding: 0;
   min-height: 100vh;
-  background-color: #000000;
+  background-color: #000000; /*Pantalla Verde: rgb(41, 245, 23) Vegas Pro */
   color: #eeeeee;
   position: relative;
 }
 
-.f-superior,
-.d-superior,
-.h-superior,
-.f-inferior,
-.d-inferior,
-.h-inferior {
+.contador {
+  font-family: "QuartzMS";
+  font-size: 80px;
+  color: #ff0a00;
+  font-variant-numeric: tabular-nums;
+  -moz-font-feature-settings: "tnum";
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+}
+
+.caja-contador {
+  position: relative;
+}
+
+.contador-estatico {
+  position: absolute;
+  left: 0;
+  color: #171815;
+  z-index: -1;
+}
+
+h1 {
   margin: 0;
   display: inline-block;
   text-align: center;
@@ -42,13 +67,24 @@ body {
 .h-superior {
   font-size: 50px;
   min-width: 1.2em;
+  -webkit-text-stroke: 2px #000000;
+  -webkit-text-fill-color: #eeeeee;
+}
+
+.f-centro,
+.d-centro,
+.h-centro {
+  font-size: 80px;
+  min-width: 1.2em;
 }
 
 .f-inferior,
 .d-inferior,
 .h-inferior {
-  font-size: 80px;
+  font-size: 50px;
   min-width: 1.2em;
+  -webkit-text-stroke: 2px #000000;
+  -webkit-text-fill-color: #eeeeee;
 }
 
 .fecha-general {
@@ -57,15 +93,33 @@ body {
 
 .superior {
   position: absolute;
-  left: 1rem;
+  background-image: url("Argentina.png");
+  object-fit: cover;
+  background-position: 5rem -10.8rem;
+  background-repeat: no-repeat;
+  background-color: #7fbbeb;
   top: 1rem;
+  left: 1rem;
+  border-radius: 4px;
+  padding: 0 8px;
 }
 
-.inferior {
+.centro {
   display: flex;
   min-height: 100vh;
   justify-content: center;
   align-items: center;
+}
+
+.inferior {
+  background-image: url("Estrellas.png");
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  border-radius: 4px;
+  padding: 0 8px;
 }
 
 .caja-hora-general {
@@ -85,4 +139,95 @@ body {
   margin: 1rem 0 0 0;
   font-size: 30px;
   text-align: center;
+}
+.envoltorio-reproductor {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); */
+  margin-bottom: 20px;
+}
+
+.visor-numeros,
+.visor-canciones {
+  overflow: hidden;
+  height: 60px;
+  background: #000000; /*Pantalla Verde: rgb(41, 245, 23) Vegas Pro */
+  border-radius: 5px;
+}
+
+.visor-numeros {
+  display: flex;
+  font-size: 40px;
+  padding-left: 15px;
+}
+
+.visor-canciones {
+  width: 1000px;
+  font-size: 40px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.columna-numero,
+.columna-canciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  translate: 0 calc(-1 * var(--indice, 0) * 60px);
+  will-change: translate;
+}
+
+.digito,
+.item-cancion {
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-text-stroke: 2px #000000;
+  -webkit-text-fill-color: #eeeeee;
+  color: #ffffff;
+}
+
+.item-cancion {
+  justify-content: flex-start;
+}
+
+.columna-canciones .item-cancion {
+  color: #eeeeee;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.entrada-numero {
+  background: #333;
+  color: #ffffff;
+  border: 1px solid #eeeeee;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.boton-inicio {
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: #eeeeee;
+  color: black;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.boton-inicio:hover {
+  background: #eeeeee;
+}
+
+.boton-inicio:disabled {
+  background: #555555;
+  cursor: not-allowed;
 }
