@@ -33,7 +33,7 @@ const inicializar = () => {
     col.style.setProperty("--indice", 0);
     for (let j = 0; j <= 10; j++) {
       const span = document.createElement("span");
-      span.className = "digito";
+      span.classList.add("digito");
       span.textContent = j % 10;
       col.appendChild(span);
     }
